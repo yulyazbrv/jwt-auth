@@ -1,0 +1,12 @@
+.link {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  text-decoration: none;
+  color: #232134;
+}
+
+.link.active {
+  font-weight: 500;
+  color: #5e96fc;
+}
