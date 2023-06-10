@@ -64,7 +64,7 @@ class UserService {
     }
 
     const userData = tokenService.validateRefreshToken(refreshToken);
-    const tokenFromDb = await tokenModel.findOne({ refreshToken });
+    const tokenFromDb = tokenModel.findOne({ refreshToken });
     if (!userData || !tokenFromDb) {
       throw new Error("Token Error");
     }
