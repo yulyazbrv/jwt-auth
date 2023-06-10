@@ -39,7 +39,7 @@ const TableUsers = (props) => {
     checkAuth()
       .then((response) => {
         if (response.status !== 500) {
-          block(selectedEmail);
+          block(selectedEmail).then((token) => {console.log(token)});
           setSelectedEmail([])
         }
       })
