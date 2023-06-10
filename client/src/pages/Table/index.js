@@ -40,6 +40,7 @@ const TableUsers = (props) => {
       .then((response) => {
         if (response.status !== 500) {
           block(selectedEmail);
+          setSelectedEmail([])
         }
       })
       .catch(() => {
@@ -53,6 +54,7 @@ const TableUsers = (props) => {
       .then((response) => {
         if (response.status !== 500) {
           unblock(selectedEmail);
+          setSelectedEmail([])
         }
       })
       .catch(() => {
@@ -66,6 +68,7 @@ const TableUsers = (props) => {
       .then((response) => {
         if (response.status !== 500) {
           removeUser(selectedEmail);
+          setSelectedEmail([])
         }
       })
       .catch(() => {
