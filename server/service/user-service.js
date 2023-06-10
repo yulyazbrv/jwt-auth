@@ -64,7 +64,7 @@ class UserService {
         throw new Error("Token Error1");
       }
   
-      const tokenFromDb = await tokenModel.findOne({ refreshToken });
+      const tokenFromDb = await tokenModel.findOne({ refreshTocken: refreshToken });
       console.log("refreshToken", refreshToken)
       console.log("tokenFromDb", tokenFromDb)
       if (!tokenFromDb) {
