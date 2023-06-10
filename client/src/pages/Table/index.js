@@ -36,11 +36,36 @@ const TableUsers = (props) => {
   };
 
   const blockClick = () => {
-    block(selectedEmail);
     checkAuth()
       .then((response) => {
-        if (response.status === 500) {
-          navigate(`/`);
+        if (response.status !== 500) {
+          block(selectedEmail);
+        }
+      })
+      .catch(() => {
+        navigate(`/`);
+        setAuth(false);
+        logout();
+      });
+  };
+  const unblockClick = () => {
+    checkAuth()
+      .then((response) => {
+        if (response.status !== 500) {
+          unblock(selectedEmail);
+        }
+      })
+      .catch(() => {
+        navigate(`/`);
+        setAuth(false);
+        logout();
+      });
+  };
+  const removeClick = () => {
+    checkAuth()
+      .then((response) => {
+        if (response.status !== 500) {
+          removeUser(selectedEmail);
         }
       })
       .catch(() => {
@@ -89,12 +114,12 @@ const TableUsers = (props) => {
           </Button>
           <Button
             onClick={() => {
-              unblock(selectedEmail);
+              unblockClick();
             }}
           >
             Unblock
           </Button>
-          <Button onClick={() => removeUser(selectedEmail)}>Delete</Button>
+          <Button onClick={() => removeClick()}>Delete</Button>
         </Flex>
       </Flex>
       <Table>
