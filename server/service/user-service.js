@@ -61,12 +61,13 @@ class UserService {
   async refresh(refreshToken) {
     try {
       if (!refreshToken) {
-        throw new Error("Token Error");
+        throw new Error("Token Error1");
       }
   
       const tokenFromDb = await tokenModel.findOne({ refreshToken });
+      console.log("tokenFromDb", tokenFromDb)
       if (!tokenFromDb) {
-        throw new Error("Token Error");
+        throw new Error("Token Error2");
       }
   
       const userData = tokenService.validateRefreshToken(refreshToken);
