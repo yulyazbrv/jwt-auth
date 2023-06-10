@@ -63,11 +63,12 @@ class UserService {
       throw new Error("Token Error");
     }
 
-    const tokenFromDb = tokenModel.findOne({ refreshToken });
-    const userData = tokenService.validateRefreshToken(refreshToken);
-    if (!userData || !tokenFromDb) {
+    const tokenFromDb = await tokenModel.findOne({ refreshToken });
+    if (!tokenFromDb) {
       throw new Error("Token Error");
     } else {
+      const userData = tokenService.validateRefreshToken(refreshToken);
+
       const user = await UserModel.findById(userData.id);
       const userDto = new UserDto(user);
       const tokens = tokenService.generateTokens({ ...userDto });
