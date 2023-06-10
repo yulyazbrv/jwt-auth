@@ -12,7 +12,12 @@ const Registration = () => {
 
   const registrationClick = () => {
     registrate(name, email, password)
-      .then(() => {})
+      .then(() => {
+        setName("");
+        setEmail("");
+        setPassword("");
+        setError("Succesfully")
+      })
       .catch((e) => {
         setError(e.message);
       });
