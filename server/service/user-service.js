@@ -63,20 +63,19 @@ class UserService {
       throw new Error("Token Error1");
     }
     const userData = tokenService.validateRefreshToken(refreshToken);
-
-    const tokenFromDb = await tokenModel
-      .findOne({ refreshToken })
-      .catch((err) => console.error(err));
-
-    if (!userData || !tokenFromDb) {
+    if (!userData) {
       throw new Error("Token Error2");
     }
-    const user = await UserModel.findById(userData.id);
-    const userDto = new UserDto(user);
-    const tokens = tokenService.generateTokens({ ...userDto });
-
-    await tokenService.saveToken(userDto.id, tokens.refreshToken);
-    return { ...tokens, user: userDto };
+    const tokenFromDb = await tokenModel
+      .findOne({ refreshToken })
+      .then(() => {
+        const user = UserModel.findById(userData.id);
+        const userDto = new UserDto(user);
+        const tokens = tokenService.generateTokens({ ...userDto });
+        tokenService.saveToken(userDto.id, tokens.refreshToken);
+        return { ...tokens, user: userDto };
+      })
+      .catch((err) => console.error(err));
   }
 
   async getAllUsers() {
