@@ -66,7 +66,6 @@ class UserController {
     try {
       const { email } = req.body;
       const user = await userService.removeUser(email);
-      //res.clearCookie("refreshToken", { httpOnly: true, path: "/" });
       return res.json(user);
     } catch (e) {
       next(e);
@@ -77,7 +76,6 @@ class UserController {
     try {
       const { email } = req.body;
       const user = await userService.blockUser(email);
-      //res.clearCookie('refreshToken')
       return res.json(user);
     } catch (e) {
       next(e);

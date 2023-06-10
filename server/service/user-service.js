@@ -16,7 +16,7 @@ class UserService {
       name,
       email,
       password: hashPassword,
-      registrationDate,
+      registrationDate: registrationDate.toLocaleString(),
       status: "unblocked",
     });
     const userDto = new UserDto(user); //lдля генерации пэйлоэд(откинули ненужные поля чтобы защифровать 2 блок jwt)
@@ -42,7 +42,7 @@ class UserService {
     const filter = { email: candidate.email };
     const updateDoc = {
       $set: {
-        lastLogin: loginTime,
+        lastLogin: loginTime.toLocaleString(),
       },
     };
     const options = { upsert: true };
